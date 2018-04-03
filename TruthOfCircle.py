@@ -60,11 +60,12 @@ def main():
 							r.redditor(person).fullname
 							res = getUserComments(person)
 							if res == "user<100":
-								mention.reply('User has less than 100 Words. Cannot Verify Trust Worth levels! If you thi \n\n  _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._')
+								mention.reply('User has less than 100 Words. Cannot Verify Trust Worth levels! If you thi \n\n '
+									      'This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._')
 							elif res == 'ratelimit':
 								mention.reply("Oopsie Woopsie. \n\n I've been Ratelimited by IBM. Please Try Again Later \n\n\ _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._")
 							else:	
-								mention.reply('User can be trusted {}% based on his Reddit History\n\n You can also consider this information about the following person: \n\n He/She is {}% Cooperate \n\n They can be {}% Agreeable \n\n and can be {}% Sympathetic \n\n ***** \n _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._'.format(str(res['trust']), str(res['cooperation']), str(res['agreeablness']), str(res['sympathy'])))
+								mention.reply('User can be trusted {}% based on their Reddit History\n\n You can also consider this information about the following person: \n\n They are {}% Cooperate \n\n They can be {}% Agreeable \n\n and can be {}% Sympathetic \n\n ***** \n _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._'.format(str(res['trust']), str(res['cooperation']), str(res['agreeablness']), str(res['sympathy'])))
 						except NotFound:
 							mention.reply('Person not found! \n\n ***** _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This Bot is in beta._')
 				else:
