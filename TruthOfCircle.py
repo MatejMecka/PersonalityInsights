@@ -54,7 +54,7 @@ def main():
 					print('{} - {} '.format(mention.author,mention.body))
 					if mention.body.startswith(trigger):
 						person = mention.body.split()[1]
-						if person.startswith('/u/'):
+						if person.startswith('/u/') or person.startswith('u/'):
 							person = person[3:]
 						try: 
 							r.redditor(person).fullname
