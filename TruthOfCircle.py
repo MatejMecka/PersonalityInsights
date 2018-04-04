@@ -1,3 +1,8 @@
+"""
+TruthOfCircle.py
+This is the Code for the Bot.
+"""
+# Imports
 import praw
 from praw.exceptions import APIException
 from prawcore.exceptions import NotFound
@@ -10,12 +15,18 @@ import sys
 import os
 import json
 
+# Connect to Reddit
 r = praw.Reddit(user_agent=userAgent,
 					 client_id=clientID, client_secret=clientSecret,
 					 username=user, password=passw)
 
-
-
+"""
+* Get Users Comments, Posts
+* Write it to a text file called userscommentsreddit.txt
+* Send the file to IBM Watson
+* Check for the status code. If it's 200 it means we are good to go, 429 means we hit a ratelimit 
+else we probably have a user that has less than 100 words.
+"""
 def getUserComments(dude):
 	print('Comments for User: {} '.format(r.redditor(dude)))
 	with open('userscommentsreddit.txt', 'w+', encoding='utf8') as file:
@@ -41,8 +52,9 @@ def getUserComments(dude):
 
 """
 * Get Each Persons comment
+* Mark it as read
 * If it Starts with the required command then take the username and call getUserComments
-* If Not Found reply that it couldn't be found
+* If Not Found or Ratelimited or Has less than 100 words say so.
 """
 
 def main():
