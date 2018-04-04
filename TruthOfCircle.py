@@ -40,10 +40,11 @@ def getUserComments(dude):
 	jsondata = json.loads(res.text)
 	if res.status_code == 200:
 		trust = jsondata["personality"][3]["children"][5]["percentile"] * 100
+		moral = jsondata["personality"][3]["children"][3]["percentile"] * 100
 		coop = jsondata["personality"][3]["children"][1]["percentile"] * 100
 		agree = jsondata["personality"][3]["percentile"] * 100
 		symp = jsondata["personality"][3]["children"][4]["percentile"] * 100
-		response = {'trust':round(trust),'cooperation': round(coop),'agreeablness':round(agree), 'sympathy': round(symp)}
+		response = {'trust':round(trust),'cooperation': round(coop),'agreeablness':round(agree), 'sympathy': round(symp), 'moral':round(moral)}
 		return response
 	elif res.status_code == 429:
 		return "ratelimit"
@@ -64,9 +65,8 @@ def main():
 				if mention.new:
 					mention.mark_read()
 					print('{} - {} '.format(mention.author,mention.body))
-					msgcontent = mention.body.lower()
-					if msgcontent.body.startswith(trigger):
-						person = msgcontent[1]
+					if mention.body.startswith(trigger):
+						person = mention.body.split()[1]
 						if person.startswith('/u/') or person.startswith('u/'):
 							person = person[3:]
 						try: 
@@ -78,9 +78,9 @@ def main():
 							elif res == 'ratelimit':
 								mention.reply("Oopsie Woopsie. \n\n I've been Ratelimited by IBM. Please Try Again Later \n\n\ _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._")
 							else:	
-								mention.reply('User can be trusted {}% based on their Reddit History\n\n You can also consider this information about the following person: \n\n They are {}% Cooperate \n\n They can be {}% Agreeable \n\n and can be {}% Sympathetic \n\n ***** \n _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._'.format(str(res['trust']), str(res['cooperation']), str(res['agreeablness']), str(res['sympathy'])))
+								mention.reply('User can be trusted {}% based on their Reddit History\n\n You can also consider this information about the following person: \n\n  They are {}% Trusting to others\n\n They are {}% Cooperate \n\n They can be {}% Agreeable \n\n and can be {}% Sympathetic \n\n ***** \n _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._'.format(str(res['moral']), str(res['trust']) ,str(res['cooperation']), str(res['agreeablness']), str(res['sympathy'])))
 						except NotFound:
-							mention.reply('Person not found! \n\n ***** _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This Bot is in beta._')
+							mention.reply('Person not found! Try again later! \n\n ***** _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This Bot is in beta._')
 				else:
 					pass
 			time.sleep(5)
