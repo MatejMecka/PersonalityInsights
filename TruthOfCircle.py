@@ -52,8 +52,9 @@ def main():
 				if mention.new:
 					mention.mark_read()
 					print('{} - {} '.format(mention.author,mention.body))
-					if mention.body.startswith(trigger):
-						person = mention.body.split()[1]
+					msgcontent = mention.body.lower()
+					if msgcontent.body.startswith(trigger):
+						person = msgcontent[1]
 						if person.startswith('/u/') or person.startswith('u/'):
 							person = person[3:]
 						try: 
