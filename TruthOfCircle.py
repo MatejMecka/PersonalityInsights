@@ -73,7 +73,7 @@ def main():
 							r.redditor(person).fullname
 							res = getUserComments(person)
 							if res == "user<100":
-								mention.reply('User has less than 100 Words. Cannot Verify Trust Worth levels! If you thi \n\n '
+								mention.reply('User has less than 100 Words. Cannot Verify Trust Worth levels! If you think this is a mistake please message the Author!\n\n'
 									      'This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._')
 							elif res == 'ratelimit':
 								mention.reply("Oopsie Woopsie. \n\n I've been Ratelimited by IBM. Please Try Again Later \n\n\ _This was performed by a bot using the IBM Watson API(Personality insights api). For any information about the bot pm /u/matejmecka. This bot is in beta._")
