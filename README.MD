@@ -1,7 +1,10 @@
 # Personality Insights Bot - For Reddit
+
+Update: The API behind this bot got deprecated. As of December 1 2021 the bot will no longer work. RIP bot
+
 A Simple bot in raw that uses the IBM Watson Personality Insights API to tell you if you should trust a person or not for your circle.
 
-### Installation
+### Installation 
 `pip install requirements.txt`
 
 ###  Getting Started
